@@ -92,7 +92,11 @@ function Hero() {
               </div>
             </div>
             <div className="center-icon">
-              <span>✨</span>
+              <img
+                src="/betterwashLogo.jpeg"
+                alt="BetterWash Logo"
+                className="center-logo"
+              />
             </div>
           </div>
         </div>

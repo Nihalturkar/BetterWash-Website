@@ -15,8 +15,7 @@ function Navbar() {
     <nav className={`navbar ${scrolled ? 'navbar-scrolled' : ''}`}>
       <div className="navbar-container">
         <a href="#" className="navbar-logo">
-          <span className="logo-icon">🧴</span>
-          <span className="logo-text">BetterWash</span>
+          <img src="/betterwashLogo.jpeg" alt="BetterWash" className="logo-img" />
         </a>
 
         <button
