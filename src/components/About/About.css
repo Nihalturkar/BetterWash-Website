@@ -1,0 +1,226 @@
+.about {
+  padding: 6rem 2rem;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+/* Left visual - slide in from left */
+.about-visual {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-visual.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Right content - slide in from right */
+.about-content {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-content.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Staggered content children */
+.about-content .section-badge {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-content.revealed .section-badge {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.1s;
+}
+
+.about-title {
+  text-align: left;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-content.revealed .about-title {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.2s;
+}
+
+.about-text {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.8;
+  margin-bottom: 1.2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-content.revealed .about-text:nth-of-type(1) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.3s;
+}
+
+.about-content.revealed .about-text:nth-of-type(2) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.35s;
+}
+
+.about-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  margin: 2rem 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-content.revealed .about-features {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.4s;
+}
+
+.about-feature {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.95rem;
+  color: #1a1a1a;
+  font-weight: 500;
+  padding: 0.5rem 0.8rem;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.about-feature:hover {
+  background: rgba(184, 134, 11, 0.05);
+  transform: translateX(5px);
+}
+
+.feature-check {
+  color: white;
+  font-weight: 700;
+  font-size: 0.75rem;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, #b8860b, #d4a017);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.about-content .btn {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-content.revealed .btn {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.5s;
+}
+
+/* Stat cards */
+.about-card-stack {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+.about-stat-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border: 1px solid #f3f4f6;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(184, 134, 11, 0.1);
+  border-color: #f0dca0;
+}
+
+.about-stat-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.about-stat-icon-1 { background: rgba(34, 197, 94, 0.1); }
+.about-stat-icon-2 { background: rgba(59, 130, 246, 0.1); }
+.about-stat-icon-3 { background: rgba(236, 72, 153, 0.1); }
+.about-stat-icon-4 { background: rgba(20, 184, 166, 0.1); }
+
+.about-stat-icon {
+  font-size: 1.5rem;
+}
+
+.about-stat-num {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.about-stat-text {
+  display: block;
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+@media (max-width: 768px) {
+  .about-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .about-features {
+    grid-template-columns: 1fr;
+  }
+
+  .about-title {
+    text-align: center;
+  }
+
+  .about-visual,
+  .about-content {
+    transform: translateY(30px);
+  }
+
+  .about-visual.revealed,
+  .about-content.revealed {
+    transform: translateY(0);
+  }
+}
