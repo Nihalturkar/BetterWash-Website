@@ -1,48 +1,8 @@
 import { useScrollReveal, useStaggerReveal } from '../../hooks/useScrollReveal'
 import './Categories.css'
 
-const categories = [
-  {
-    id: 1,
-    name: 'Shampoo',
-    emoji: '🧴',
-    count: '12 Products',
-    description: 'Nourishing hair care solutions',
-    color: '#b8860b',
-  },
-  {
-    id: 2,
-    name: 'Body Wash',
-    emoji: '🛁',
-    count: '8 Products',
-    description: 'Refreshing body cleansers',
-    color: '#d4a017',
-  },
-  {
-    id: 3,
-    name: 'Moisturizer',
-    emoji: '💧',
-    count: '10 Products',
-    description: 'Deep hydration formulas',
-    color: '#e8c547',
-  },
-  {
-    id: 4,
-    name: 'Face Cleanser',
-    emoji: '🧼',
-    count: '9 Products',
-    description: 'Gentle facial care',
-    color: '#c9942e',
-  },
-  {
-    id: 5,
-    name: 'Herbal Products',
-    emoji: '🌿',
-    count: '15 Products',
-    description: '100% natural ingredients',
-    color: '#b8860b',
-  },
-]
+import { Link } from 'react-router-dom'
+import { categories } from '../../data/products'
 
 function Categories() {
   const [headerRef, headerVisible] = useScrollReveal()
@@ -61,7 +21,8 @@ function Categories() {
 
         <div className={`categories-grid ${gridVisible ? 'revealed' : ''}`} ref={gridRef}>
           {categories.map((cat, index) => (
-            <div
+            <Link
+              to={`/category/${cat.name}`}
               className="category-card"
               key={cat.id}
               style={{ '--delay': `${index * 0.1}s`, '--accent': cat.color }}
@@ -78,7 +39,7 @@ function Categories() {
                   <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

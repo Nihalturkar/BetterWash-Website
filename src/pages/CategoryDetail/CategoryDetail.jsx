@@ -1,26 +1,39 @@
-import { useScrollReveal, useStaggerReveal } from '../../hooks/useScrollReveal'
-import './Products.css'
+import { useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { products, categories } from '../../data/products';
+import '../../components/Products/Products.css'; // Reuse product card styles
+import './CategoryDetail.css';
 
-import { Link } from 'react-router-dom'
-import { products } from '../../data/products'
+function CategoryDetail() {
+  const { categoryId } = useParams();
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [categoryId]);
 
-function Products() {
-  const [headerRef, headerVisible] = useScrollReveal()
-  const [gridRef, gridVisible] = useStaggerReveal(products.length)
+  const categoryInfo = categories.find(c => c.name.toLowerCase() === categoryId.toLowerCase()) || 
+    { name: categoryId, color: '#4CAF50', emoji: '✨', description: 'Explore our products' };
+
+  const categoryProducts = products.filter(p => p.category.toLowerCase() === categoryId.toLowerCase());
 
   return (
-    <section className="products" id="products">
-      <div className="products-container">
-        <div className={`section-header ${headerVisible ? 'revealed' : ''}`} ref={headerRef}>
-          <span className="section-badge">Our Collection</span>
-          <h2 className="section-title">Featured Products</h2>
-          <p className="section-description">
-            Handpicked premium products crafted with natural ingredients for your daily care routine.
-          </p>
+    <div className="category-detail-container">
+      <div className="category-header" style={{ backgroundColor: categoryInfo.color }}>
+        <div className="category-header-bg"></div>
+        <div className="category-header-content">
+          <span className="category-large-emoji">{categoryInfo.emoji}</span>
+          <h1 className="category-title">{categoryInfo.name}</h1>
+          <p className="category-subtitle">{categoryInfo.description}</p>
         </div>
+      </div>
 
-        <div className={`products-grid ${gridVisible ? 'revealed' : ''}`} ref={gridRef}>
-          {products.map((product, index) => (
+      {categoryProducts.length === 0 ? (
+        <div className="no-products">
+          No products found in this category.
+        </div>
+      ) : (
+        <div className="products-grid revealed">
+          {categoryProducts.map((product, index) => (
             <div
               className="product-card"
               key={product.id}
@@ -57,9 +70,9 @@ function Products() {
             </div>
           ))}
         </div>
-      </div>
-    </section>
-  )
+      )}
+    </div>
+  );
 }
 
-export default Products
+export default CategoryDetail;

@@ -1,0 +1,243 @@
+export const categories = [
+  {
+    id: 1,
+    name: 'Shampoo',
+    emoji: '🧴',
+    count: '12 Products',
+    description: 'Nourishing hair care solutions',
+    color: '#b8860b',
+  },
+  {
+    id: 2,
+    name: 'Body Wash',
+    emoji: '🛁',
+    count: '8 Products',
+    description: 'Refreshing body cleansers',
+    color: '#d4a017',
+  },
+  {
+    id: 3,
+    name: 'Moisturizer',
+    emoji: '💧',
+    count: '10 Products',
+    description: 'Deep hydration formulas',
+    color: '#e8c547',
+  },
+  {
+    id: 4,
+    name: 'Face Cleanser',
+    emoji: '🧼',
+    count: '9 Products',
+    description: 'Gentle facial care',
+    color: '#c9942e',
+  },
+  {
+    id: 5,
+    name: 'Herbal Products',
+    emoji: '🌿',
+    count: '15 Products',
+    description: '100% natural ingredients',
+    color: '#b8860b',
+  },
+];
+
+export const products = [
+  {
+    id: 1,
+    name: 'Herbal Shampoo',
+    category: 'Shampoo',
+    price: '₹349',
+    originalPrice: '₹499',
+    numericPrice: 349,
+    description: 'Gentle cleansing with natural herbs for silky smooth hair.',
+    longDescription: 'Our Herbal Shampoo is meticulously crafted with a blend of ancient Ayurvedic herbs to gently cleanse your scalp while retaining its natural oils. It strengthens the roots, visibly reduces hair fall, and brings out a lustrous shine that lasts for days. Suitable for all hair types, it is free from harsh sulfates and parabens, ensuring a wholesome and safe hair care routine.',
+    benefits: ['Reduces Hair Fall', 'Adds Shine', 'Paraben Free'],
+    features: [
+      'Infused with Neem and Amla',
+      'Sulfate-free formulation',
+      'Protects against environmental damage',
+      'Safe for color-treated hair'
+    ],
+    emoji: '🧴',
+    color: '#b8860b',
+    stock: 50,
+    rating: 4.5,
+    reviews: 128
+  },
+  {
+    id: 2,
+    name: 'Refresh Body Wash',
+    category: 'Body Wash',
+    price: '₹299',
+    originalPrice: '₹449',
+    numericPrice: 299,
+    description: 'Energizing body wash with aloe vera and vitamin E.',
+    longDescription: 'Start your morning with a burst of energy using our Refresh Body Wash. Formulated with cooling Aloe Vera extracts and nourishing Vitamin E, it deeply cleanses your skin while leaving a lingering refreshing fragrance. Its lather is rich and creamy, perfect for a spa-like shower experience every day.',
+    benefits: ['Deep Cleansing', 'Moisturizing', 'Fresh Fragrance'],
+    features: [
+      'Rich in antioxidants',
+      'pH balanced',
+      'Invigorating citrus scent',
+      'Leaves skin soft and supple'
+    ],
+    emoji: '🛁',
+    color: '#d4a017',
+    stock: 120,
+    rating: 4.7,
+    reviews: 512
+  },
+  {
+    id: 3,
+    name: 'Hydra Moisturizer',
+    category: 'Moisturizer',
+    price: '₹449',
+    originalPrice: '₹599',
+    numericPrice: 449,
+    description: '24-hour hydration with hyaluronic acid and shea butter.',
+    longDescription: 'Experience unparalleled moisture with the Hydra Moisturizer. Fortified with Hyaluronic Acid, it locks in hydration, preventing water loss throughout the day. The Shea Butter base melts into your skin, providing intense nourishment without any greasy residue. Ideal for plumping skin and reducing the appearance of fine lines.',
+    benefits: ['Deep Hydration', 'Non-Greasy', 'All Skin Types'],
+    features: [
+      'Contains 2% Hyaluronic Acid',
+      'Non-comedogenic',
+      'Clinically tested for 24hr moisture',
+      'Fast-absorbing formula'
+    ],
+    emoji: '💧',
+    color: '#e8c547',
+    stock: 85,
+    rating: 4.8,
+    reviews: 405
+  },
+  {
+    id: 4,
+    name: 'Glow Face Cleanser',
+    category: 'Face Cleanser',
+    price: '₹399',
+    originalPrice: '₹549',
+    numericPrice: 399,
+    description: 'Brightening face cleanser with vitamin C and niacinamide.',
+    longDescription: 'Achieve a radiant, even-toned complexion with the Glow Face Cleanser. This gentle yet effective wash clears pores of dirt, oil, and makeup while Vitamin C and Niacinamide work systematically to brighten hyperpigmentation and reduce dullness. Step out with glowing, refreshed skin after every wash.',
+    benefits: ['Brightening', 'Pore Cleansing', 'Gentle Formula'],
+    features: [
+      'Enriched with Vitamin C & Niacinamide',
+      'Removes dead skin cells',
+      'Soothes inflammation',
+      'Dermatologically tested'
+    ],
+    emoji: '🧼',
+    color: '#b8860b',
+    stock: 200,
+    rating: 4.6,
+    reviews: 210
+  },
+  {
+    id: 5,
+    name: 'Neem Face Pack',
+    category: 'Herbal Products',
+    price: '₹279',
+    originalPrice: '₹399',
+    numericPrice: 279,
+    description: 'Pure neem extract face pack for clear and healthy skin.',
+    longDescription: 'Detoxify your skin with our traditional Neem Face Pack. Neem is renowned for its antibacterial properties, making this pack an excellent treatment for acne-prone skin. It draws out impurities, controls excess sebum production, and calms redness, leaving you with a purified, clear complexion.',
+    benefits: ['Anti-Acne', 'Oil Control', '100% Natural'],
+    features: [
+      '100% Pure Organic Neem Extract',
+      'No artificial fragrances',
+      'Helps prevent breakouts',
+      'Cooling effect upon application'
+    ],
+    emoji: '🌿',
+    color: '#d4a017',
+    stock: 45,
+    rating: 4.3,
+    reviews: 89
+  },
+  {
+    id: 6,
+    name: 'Rose Body Lotion',
+    category: 'Moisturizer',
+    price: '₹329',
+    originalPrice: '₹479',
+    numericPrice: 329,
+    description: 'Luxurious rose-infused body lotion for soft, fragrant skin.',
+    longDescription: 'Indulge your senses in the elegant aroma of freshly bloomed roses with our Rose Body Lotion. This luscious, velvety lotion provides deep, long-lasting hydration, instantly relieving dry skin. It absorbs beautifully, leaving behind nothing but incredibly soft skin and a subtle, romantic floral scent.',
+    benefits: ['Long Lasting', 'Soft Skin', 'Rose Extract'],
+    features: [
+      'Real Bulgarian Rose extracts',
+      'Intensive repair for dry patches',
+      'Vegan and cruelty-free',
+      'Lightweight texture'
+    ],
+    emoji: '🌹',
+    color: '#e8c547',
+    stock: 140,
+    rating: 4.9,
+    reviews: 800
+  },
+  {
+    id: 7,
+    name: 'Sandalwood Soap',
+    category: 'Herbal Products',
+    price: '₹149',
+    originalPrice: '₹199',
+    numericPrice: 149,
+    description: 'Traditional sandalwood soap for naturally glowing skin.',
+    longDescription: 'Immerse yourself in the rich, woody fragrance of real Sandalwood. This handcrafted bathing bar cleanses gently while offering a soothing and cooling effect on the body, perfect for tackling heat and stress. Rich in natural oils, it maintains your skin\'s health making it soft, supple, and naturally radiant.',
+    benefits: ['Cooling Effect', 'Rich Fragrance', 'Handcrafted'],
+    features: [
+      'Pure Mysore Sandalwood Oil',
+      'Free from animal fat',
+      'Suits all skin types',
+      'Eco-friendly packaging'
+    ],
+    emoji: '🧼',
+    color: '#d4a017',
+    stock: 200,
+    rating: 4.8,
+    reviews: 320
+  },
+  {
+    id: 8,
+    name: 'Tea Tree Face Wash',
+    category: 'Face Cleanser',
+    price: '₹249',
+    originalPrice: '₹349',
+    numericPrice: 249,
+    description: 'Purifying tea tree face wash for acne-free clear skin.',
+    longDescription: 'Target blemishes and excess oil with our powerful Tea Tree Face Wash. Infused with natural Tea Tree Oil, it dives deep into pores to fight acne-causing bacteria without over-drying the skin. Regular use leaves your face feeling intensely clean, mattified, and visibly clearer.',
+    benefits: ['Acne Control', 'Deep Cleanse', 'Oil Free'],
+    features: [
+      '100% Vegan',
+      'Contains Salicylic Acid',
+      'No Artificial Colors',
+      'Dermatologist Tested'
+    ],
+    emoji: '🌿',
+    color: '#4CAF50',
+    stock: 75,
+    rating: 4.4,
+    reviews: 450
+  },
+  {
+    id: 9,
+    name: 'Coffee Body Scrub',
+    category: 'Body Wash',
+    price: '₹399',
+    originalPrice: '₹599',
+    numericPrice: 399,
+    description: 'Exfoliating coffee scrub for smooth and tan-free skin.',
+    longDescription: 'Revive dull, tired skin with our energizing Coffee Body Scrub. Made with freshly ground Robusta coffee and cold-pressed coconut oil, it effectively buffs away dead skin cells, reduces cellulite, and tackles stubborn tan. Experience incredibly smooth, polished skin with a delicious aroma of fresh coffee.',
+    benefits: ['Exfoliation', 'Tan Removal', 'Smoothing'],
+    features: [
+      'Pure Robusta Coffee Beans',
+      'Rich in antioxidants',
+      'Improves blood circulation',
+      'Sulfate & Paraben free'
+    ],
+    emoji: '☕',
+    color: '#6F4E37',
+    stock: 50,
+    rating: 4.7,
+    reviews: 612
+  }
+];
