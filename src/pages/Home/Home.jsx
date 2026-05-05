@@ -10,8 +10,8 @@ function Home() {
   return (
     <main className="home-container">
       <Hero />
-      <Products />
       <Categories />
+      <Products />
       <About />
       <Reviews />
       <Blog />

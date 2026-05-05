@@ -1,6 +1,6 @@
 .reviews {
-  padding: 6rem 2rem;
-  background: linear-gradient(180deg, #ffffff 0%, #fefcf5 100%);
+  padding: 5rem 2rem;
+  background: #f9fafb;
 }
 
 .reviews-container {
@@ -29,9 +29,9 @@
 
 .review-card {
   background: white;
-  border-radius: 20px;
-  padding: 2rem;
-  border: 1px solid #f3f4f6;
+  border-radius: 16px;
+  padding: 1.8rem;
+  border: 1px solid #f0f0f0;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
@@ -44,20 +44,20 @@
   right: 20px;
   font-size: 8rem;
   font-family: Georgia, serif;
-  color: rgba(184, 134, 11, 0.04);
+  color: rgba(0, 139, 139, 0.04);
   line-height: 1;
   pointer-events: none;
   transition: color 0.3s ease;
 }
 
 .review-card:hover::before {
-  color: rgba(184, 134, 11, 0.08);
+  color: rgba(0, 139, 139, 0.08);
 }
 
 .review-card:hover {
   transform: translateY(-5px) !important;
-  box-shadow: 0 15px 40px rgba(184, 134, 11, 0.1);
-  border-color: #f0dca0;
+  box-shadow: 0 15px 40px rgba(0, 139, 139, 0.08);
+  border-color: rgba(0, 139, 139, 0.2);
 }
 
 .review-stars {
@@ -73,7 +73,7 @@
 }
 
 .star.filled {
-  color: #d4a017;
+  color: #f59e0b;
 }
 
 .review-card:hover .star.filled:nth-child(1) { transform: scale(1.2); transition-delay: 0s; }
@@ -83,7 +83,7 @@
 .review-card:hover .star.filled:nth-child(5) { transform: scale(1.2); transition-delay: 0.2s; }
 
 .review-text {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: #4b5563;
   line-height: 1.7;
   margin-bottom: 1.5rem;
@@ -97,10 +97,10 @@
 }
 
 .review-avatar {
-  width: 45px;
-  height: 45px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #b8860b, #d4a017);
+  background: var(--primary);
   color: white;
   display: flex;
   align-items: center;
@@ -111,8 +111,8 @@
 }
 
 .review-card:hover .review-avatar {
-  transform: scale(1.1) rotate(-5deg);
-  box-shadow: 0 4px 15px rgba(184, 134, 11, 0.3);
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(0, 139, 139, 0.3);
 }
 
 .review-info {
@@ -124,20 +124,20 @@
 .review-name {
   font-weight: 700;
   color: #1a1a1a;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
 .review-product {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: #9ca3af;
 }
 
 .review-verified {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 600;
   color: #22c55e;
   background: rgba(34, 197, 94, 0.1);
-  padding: 0.3rem 0.6rem;
+  padding: 0.25rem 0.5rem;
   border-radius: 50px;
   white-space: nowrap;
 }

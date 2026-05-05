@@ -13,7 +13,7 @@ function Categories() {
       <div className="categories-container">
         <div className={`section-header ${headerVisible ? 'revealed' : ''}`} ref={headerRef}>
           <span className="section-badge">Browse</span>
-          <h2 className="section-title">Product Categories</h2>
+          <h2 className="section-title">Shop by Category</h2>
           <p className="section-description">
             Explore our wide range of premium skincare and hygiene products.
           </p>
@@ -28,8 +28,8 @@ function Categories() {
               style={{ '--delay': `${index * 0.1}s`, '--accent': cat.color }}
             >
               <div className="category-bg-gradient"></div>
-              <div className="category-icon" style={{ background: `${cat.color}12` }}>
-                <span>{cat.emoji}</span>
+              <div className="category-image-box">
+                <img src={cat.image} alt={cat.name} className="category-img" />
               </div>
               <h3 className="category-name">{cat.name}</h3>
               <p className="category-desc">{cat.description}</p>

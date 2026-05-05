@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { CartProvider } from './context/CartContext'
+import OfferBar from './components/OfferBar/OfferBar'
 import Navbar from './components/Navbar/Navbar'
 import Home from './pages/Home/Home'
 import ProductDetail from './pages/ProductDetail/ProductDetail'
@@ -12,6 +13,7 @@ function App() {
   return (
     <Router>
       <CartProvider>
+        <OfferBar />
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />

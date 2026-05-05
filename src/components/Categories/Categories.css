@@ -1,6 +1,6 @@
 .categories {
-  padding: 6rem 2rem;
-  background: linear-gradient(180deg, #fefcf5 0%, #ffffff 100%);
+  padding: 5rem 2rem;
+  background: #f9fafb;
   position: relative;
 }
 
@@ -29,26 +29,27 @@
 
 .category-card {
   background: white;
-  border-radius: 20px;
-  padding: 2rem 1.5rem;
+  border-radius: 16px;
+  padding: 1.5rem 1.2rem;
   text-align: center;
-  border: 1px solid #f3f4f6;
+  border: 1px solid #f0f0f0;
   cursor: pointer;
   position: relative;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
 }
 
 .category-card:hover {
-  transform: translateY(-8px) scale(1.02) !important;
-  box-shadow: 0 20px 50px rgba(184, 134, 11, 0.12);
-  border-color: #f0dca0;
+  transform: translateY(-6px) scale(1.02) !important;
+  box-shadow: 0 15px 40px rgba(0, 139, 139, 0.1);
+  border-color: rgba(0, 139, 139, 0.2);
 }
 
 .category-bg-gradient {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 100%, var(--accent, #b8860b), transparent 70%);
+  background: radial-gradient(circle at 50% 100%, var(--accent, #008b8b), transparent 70%);
   opacity: 0;
   transition: opacity 0.4s ease;
   pointer-events: none;
@@ -58,46 +59,48 @@
   opacity: 0.05;
 }
 
-.category-icon {
+.category-image-box {
   width: 80px;
   height: 80px;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1.2rem;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 1rem;
+  border: 3px solid #f0fafa;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.category-card:hover .category-icon {
-  transform: scale(1.1) rotate(-5deg);
+.category-card:hover .category-image-box {
+  transform: scale(1.1);
+  border-color: rgba(0, 139, 139, 0.2);
 }
 
-.category-icon span {
-  font-size: 2.5rem;
+.category-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .category-name {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 700;
   color: #1a1a1a;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.3rem;
   transition: color 0.3s ease;
 }
 
 .category-card:hover .category-name {
-  color: var(--accent, #b8860b);
+  color: var(--primary);
 }
 
 .category-desc {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: #9ca3af;
-  margin-bottom: 0.8rem;
-  line-height: 1.5;
+  margin-bottom: 0.6rem;
+  line-height: 1.4;
 }
 
 .category-count {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 700;
 }
 

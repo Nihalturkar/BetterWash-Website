@@ -2,42 +2,42 @@ export const categories = [
   {
     id: 1,
     name: 'Shampoo',
-    emoji: '🧴',
+    image: 'https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?w=300&q=80',
     count: '12 Products',
     description: 'Nourishing hair care solutions',
-    color: '#b8860b',
+    color: '#008b8b',
   },
   {
     id: 2,
     name: 'Body Wash',
-    emoji: '🛁',
+    image: 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=300&q=80',
     count: '8 Products',
     description: 'Refreshing body cleansers',
-    color: '#d4a017',
+    color: '#00b3b3',
   },
   {
     id: 3,
     name: 'Moisturizer',
-    emoji: '💧',
+    image: 'https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?w=300&q=80',
     count: '10 Products',
     description: 'Deep hydration formulas',
-    color: '#e8c547',
+    color: '#008b8b',
   },
   {
     id: 4,
     name: 'Face Cleanser',
-    emoji: '🧼',
+    image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=300&q=80',
     count: '9 Products',
     description: 'Gentle facial care',
-    color: '#c9942e',
+    color: '#00b3b3',
   },
   {
     id: 5,
     name: 'Herbal Products',
-    emoji: '🌿',
+    image: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=300&q=80',
     count: '15 Products',
     description: '100% natural ingredients',
-    color: '#b8860b',
+    color: '#008b8b',
   },
 ];
 
@@ -58,8 +58,8 @@ export const products = [
       'Protects against environmental damage',
       'Safe for color-treated hair'
     ],
-    emoji: '🧴',
-    color: '#b8860b',
+    image: 'https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?w=400&q=80',
+    color: '#008b8b',
     stock: 50,
     rating: 4.5,
     reviews: 128
@@ -80,8 +80,8 @@ export const products = [
       'Invigorating citrus scent',
       'Leaves skin soft and supple'
     ],
-    emoji: '🛁',
-    color: '#d4a017',
+    image: 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400&q=80',
+    color: '#00b3b3',
     stock: 120,
     rating: 4.7,
     reviews: 512
@@ -102,8 +102,8 @@ export const products = [
       'Clinically tested for 24hr moisture',
       'Fast-absorbing formula'
     ],
-    emoji: '💧',
-    color: '#e8c547',
+    image: 'https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?w=400&q=80',
+    color: '#008b8b',
     stock: 85,
     rating: 4.8,
     reviews: 405
@@ -124,8 +124,8 @@ export const products = [
       'Soothes inflammation',
       'Dermatologically tested'
     ],
-    emoji: '🧼',
-    color: '#b8860b',
+    image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&q=80',
+    color: '#00b3b3',
     stock: 200,
     rating: 4.6,
     reviews: 210
@@ -146,8 +146,8 @@ export const products = [
       'Helps prevent breakouts',
       'Cooling effect upon application'
     ],
-    emoji: '🌿',
-    color: '#d4a017',
+    image: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=400&q=80',
+    color: '#008b8b',
     stock: 45,
     rating: 4.3,
     reviews: 89
@@ -168,8 +168,8 @@ export const products = [
       'Vegan and cruelty-free',
       'Lightweight texture'
     ],
-    emoji: '🌹',
-    color: '#e8c547',
+    image: 'https://images.unsplash.com/photo-1601049676869-702ea24cfd58?w=400&q=80',
+    color: '#00b3b3',
     stock: 140,
     rating: 4.9,
     reviews: 800
@@ -190,8 +190,8 @@ export const products = [
       'Suits all skin types',
       'Eco-friendly packaging'
     ],
-    emoji: '🧼',
-    color: '#d4a017',
+    image: 'https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=400&q=80',
+    color: '#008b8b',
     stock: 200,
     rating: 4.8,
     reviews: 320
@@ -212,8 +212,8 @@ export const products = [
       'No Artificial Colors',
       'Dermatologist Tested'
     ],
-    emoji: '🌿',
-    color: '#4CAF50',
+    image: 'https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=400&q=80',
+    color: '#00b3b3',
     stock: 75,
     rating: 4.4,
     reviews: 450
@@ -234,8 +234,8 @@ export const products = [
       'Improves blood circulation',
       'Sulfate & Paraben free'
     ],
-    emoji: '☕',
-    color: '#6F4E37',
+    image: 'https://images.unsplash.com/photo-1570194065650-d99fb4ee0c8d?w=400&q=80',
+    color: '#008b8b',
     stock: 50,
     rating: 4.7,
     reviews: 612

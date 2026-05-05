@@ -31,9 +31,7 @@ function ProductDetail() {
   return (
     <div className="product-detail-container">
       <div className="product-image-section">
-        <div className="product-large-emoji" style={{ color: product.color }}>
-          {product.emoji}
-        </div>
+        <img src={product.image} alt={product.name} className="product-detail-img" />
       </div>
 
       <div className="product-info-section">

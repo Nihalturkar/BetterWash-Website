@@ -13,7 +13,7 @@ function Products() {
       <div className="products-container">
         <div className={`section-header ${headerVisible ? 'revealed' : ''}`} ref={headerRef}>
           <span className="section-badge">Our Collection</span>
-          <h2 className="section-title">Featured Products</h2>
+          <h2 className="section-title">Bestsellers</h2>
           <p className="section-description">
             Handpicked premium products crafted with natural ingredients for your daily care routine.
           </p>
@@ -27,8 +27,11 @@ function Products() {
               style={{ '--delay': `${index * 0.1}s`, '--accent': product.color }}
             >
               <div className="product-card-glow"></div>
-              <div className="product-emoji" style={{ background: `${product.color}15` }}>
-                <span>{product.emoji}</span>
+              <div className="product-image-box">
+                <img src={product.image} alt={product.name} className="product-img" />
+                <span className="product-discount">
+                  {Math.round((1 - product.numericPrice / parseInt(product.originalPrice.replace('₹', ''))) * 100)}% OFF
+                </span>
               </div>
               <span className="product-category">{product.category}</span>
               <h3 className="product-name">{product.name}</h3>
@@ -48,7 +51,7 @@ function Products() {
                   className="product-btn"
                   style={{ background: product.color }}
                 >
-                  <span>View Details</span>
+                  <span>View</span>
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                     <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
