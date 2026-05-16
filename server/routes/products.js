@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { readJSON, writeJSON } from '../utils/db.js';
+import { generateSlug, ensureUniqueSlug } from '../utils/slug.js';
 import { authenticateToken } from '../middleware/auth.js';
 
 const router = Router();
@@ -10,10 +11,13 @@ router.get('/', (req, res) => {
   res.json(products);
 });
 
-// GET /api/products/:id - public
-router.get('/:id', (req, res) => {
+// GET /api/products/:idOrSlug - public (supports both ID and slug)
+router.get('/:idOrSlug', (req, res) => {
   const products = readJSON('products.json');
-  const product = products.find(p => p.id === parseInt(req.params.id));
+  const param = req.params.idOrSlug;
+  const product = products.find(p =>
+    p.slug === param || p.id === parseInt(param)
+  );
   if (!product) return res.status(404).json({ message: 'Product not found' });
   res.json(product);
 });
@@ -23,8 +27,14 @@ router.post('/', authenticateToken, (req, res) => {
   const products = readJSON('products.json');
   const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
 
+  const slug = ensureUniqueSlug(
+    req.body.slug || generateSlug(req.body.name),
+    products
+  );
+
   const newProduct = {
     id: newId,
+    slug,
     name: req.body.name,
     category: req.body.category,
     price: `₹${req.body.numericPrice}`,
@@ -38,7 +48,8 @@ router.post('/', authenticateToken, (req, res) => {
     color: req.body.color || '#008b8b',
     stock: Number(req.body.stock) || 0,
     rating: Number(req.body.rating) || 4.0,
-    reviews: Number(req.body.reviews) || 0
+    reviews: Number(req.body.reviews) || 0,
+    seo: req.body.seo || { metaTitle: '', metaDescription: '', metaKeywords: '' }
   };
 
   products.push(newProduct);
@@ -52,10 +63,15 @@ router.put('/:id', authenticateToken, (req, res) => {
   const index = products.findIndex(p => p.id === parseInt(req.params.id));
   if (index === -1) return res.status(404).json({ message: 'Product not found' });
 
+  const slug = req.body.slug
+    ? ensureUniqueSlug(req.body.slug, products, products[index].id)
+    : products[index].slug || generateSlug(req.body.name || products[index].name);
+
   const updated = {
     ...products[index],
     ...req.body,
     id: products[index].id,
+    slug,
     price: `₹${req.body.numericPrice || products[index].numericPrice}`,
     originalPrice: `₹${req.body.originalNumericPrice || parseInt(products[index].originalPrice.replace('₹', ''))}`,
     numericPrice: Number(req.body.numericPrice || products[index].numericPrice),

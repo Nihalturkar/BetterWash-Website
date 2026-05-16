@@ -60,7 +60,7 @@ function Products() {
                   <span className="original-price">{product.originalPrice}</span>
                 </div>
                 <Link
-                  to={`/product/${product.id}`}
+                  to={`/product/${product.slug || product.id}`}
                   className="product-btn"
                   style={{ background: product.color }}
                 >

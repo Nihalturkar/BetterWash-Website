@@ -7,6 +7,7 @@ import Navbar from './components/Navbar/Navbar'
 import Home from './pages/Home/Home'
 import ProductDetail from './pages/ProductDetail/ProductDetail'
 import CategoryDetail from './pages/CategoryDetail/CategoryDetail'
+import BlogDetail from './pages/BlogDetail/BlogDetail'
 import Cart from './pages/Cart/Cart'
 import Footer from './components/Footer/Footer'
 import AdminLogin from './pages/Admin/AdminLogin'
@@ -27,8 +28,9 @@ function CustomerLayout() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/product/:id" element={<ProductDetail />} />
-        <Route path="/category/:categoryId" element={<CategoryDetail />} />
+        <Route path="/product/:slug" element={<ProductDetail />} />
+        <Route path="/category/:slug" element={<CategoryDetail />} />
+        <Route path="/blog/:slug" element={<BlogDetail />} />
         <Route path="/cart" element={<Cart />} />
       </Routes>
       <Footer />

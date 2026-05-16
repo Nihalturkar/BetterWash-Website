@@ -1,6 +1,7 @@
 [
   {
     "id": 1,
+    "slug": "5-natural-ingredients-that-transform-your-skin",
     "title": "5 Natural Ingredients That Transform Your Skin",
     "excerpt": "Discover the power of nature with these five ingredients that dermatologists swear by for healthier, glowing skin every day.",
     "date": "Mar 28, 2025",
@@ -20,10 +21,18 @@
       "**4. Shea Butter** — Extracted from the African shea tree, this rich butter is packed with fatty acids and vitamins. It provides intense moisture without clogging pores, making it ideal for dry and sensitive skin.",
       "**5. Neem Extract** — Neem has been used in Ayurvedic medicine for centuries. Its antibacterial, antifungal, and anti-inflammatory properties make it excellent for treating acne, eczema, and other skin conditions.",
       "At BetterWash, we carefully blend these natural ingredients into our products to give you the best of nature and science combined."
-    ]
+    ],
+    "seo": {
+      "metaTitle": "5 Natural Ingredients That Transform Your Skin | BetterWash Blog",
+      "metaDescription": "Discover 5 powerful natural skincare ingredients - Aloe Vera, Turmeric, Tea Tree Oil, Shea Butter & Neem. Dermatologist-approved tips for glowing skin.",
+      "metaKeywords": "natural skincare ingredients, aloe vera skin, turmeric skincare, tea tree oil, shea butter, neem extract",
+      "canonicalUrl": "",
+      "imageAlt": "Natural skincare ingredients for glowing skin"
+    }
   },
   {
     "id": 2,
+    "slug": "ultimate-hair-care-routine-every-season",
     "title": "The Ultimate Hair Care Routine for Every Season",
     "excerpt": "From monsoon frizz to winter dryness — learn how to adapt your hair care routine throughout the year with BetterWash products.",
     "date": "Mar 15, 2025",
@@ -41,10 +50,18 @@
       "**Autumn (October–November):** This is recovery time. Deep condition your hair weekly, trim split ends, and reduce heat styling. A protein-rich hair mask once a week will restore strength and shine.",
       "**Winter (December–March):** Cold, dry air strips moisture from your hair. Use a rich, nourishing shampoo and follow up with a thick conditioner. Oil massages with coconut or argan oil twice a week can prevent dryness and static.",
       "The key is to listen to your hair and adjust your routine accordingly. With BetterWash products, you have natural, season-friendly options for every hair type."
-    ]
+    ],
+    "seo": {
+      "metaTitle": "Ultimate Hair Care Routine for Every Season | BetterWash Blog",
+      "metaDescription": "Learn how to adapt your hair care routine for summer, monsoon, autumn & winter. Seasonal hair care tips with natural BetterWash products.",
+      "metaKeywords": "hair care routine, seasonal hair care, monsoon hair care, winter hair care, herbal shampoo",
+      "canonicalUrl": "",
+      "imageAlt": "Seasonal hair care routine guide"
+    }
   },
   {
     "id": 3,
+    "slug": "why-paraben-free-products-matter-for-health",
     "title": "Why Paraben-Free Products Matter for Your Health",
     "excerpt": "Understanding the science behind paraben-free skincare and why making the switch is one of the best decisions for your body.",
     "date": "Mar 5, 2025",
@@ -61,6 +78,13 @@
       "**Natural alternatives work:** Modern preservation techniques using natural ingredients like rosemary extract, vitamin E, and grapefruit seed extract are just as effective at keeping products fresh. BetterWash uses these natural preservatives in all our formulations.",
       "**Making the switch:** Check your product labels — if you see any ingredient ending in \"-paraben,\" consider switching to a cleaner alternative. Your skin absorbs up to 60% of what you put on it, so choosing paraben-free products is an investment in your long-term health.",
       "At BetterWash, every single product is 100% paraben-free. We believe you shouldn't have to compromise between effective skincare and your health."
-    ]
+    ],
+    "seo": {
+      "metaTitle": "Why Paraben-Free Products Matter for Health | BetterWash Blog",
+      "metaDescription": "Learn why paraben-free skincare matters. Understand health risks of parabens and discover natural alternatives. 100% paraben-free products at BetterWash.",
+      "metaKeywords": "paraben free, paraben free products, natural skincare, chemical free skincare, BetterWash",
+      "canonicalUrl": "",
+      "imageAlt": "Paraben-free natural skincare products"
+    }
   }
 ]

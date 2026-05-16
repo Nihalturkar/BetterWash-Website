@@ -4,10 +4,17 @@ import ImageUpload from '../../components/Admin/ImageUpload';
 
 import { API_URL } from '../../config';
 
+function generateSlug(text) {
+  return text.toString().toLowerCase().trim()
+    .replace(/[\s_]+/g, '-').replace(/[^\w\-]+/g, '')
+    .replace(/\-\-+/g, '-').replace(/^-+/, '').replace(/-+$/, '');
+}
+
 const emptyProduct = {
-  name: '', category: '', numericPrice: '', originalNumericPrice: '',
+  name: '', slug: '', category: '', numericPrice: '', originalNumericPrice: '',
   description: '', longDescription: '', benefits: '', features: '',
-  image: '', color: '#008b8b', stock: '', rating: '4.0', reviews: '0'
+  image: '', color: '#008b8b', stock: '', rating: '4.0', reviews: '0',
+  seo: { metaTitle: '', metaDescription: '', metaKeywords: '' }
 };
 
 function AdminProducts() {
@@ -43,6 +50,7 @@ function AdminProducts() {
     setEditId(product.id);
     setForm({
       name: product.name,
+      slug: product.slug || '',
       category: product.category,
       numericPrice: product.numericPrice,
       originalNumericPrice: parseInt(product.originalPrice.replace('₹', '')),
@@ -54,13 +62,22 @@ function AdminProducts() {
       color: product.color || '#008b8b',
       stock: product.stock,
       rating: product.rating,
-      reviews: product.reviews
+      reviews: product.reviews,
+      seo: product.seo || { metaTitle: '', metaDescription: '', metaKeywords: '' }
     });
     setShowModal(true);
   };
 
   const handleChange = (e) => {
-    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    setForm(prev => {
+      const updated = { ...prev, [name]: value };
+      // Auto-generate slug when name changes (only if slug is empty or was auto-generated)
+      if (name === 'name' && (!prev.slug || prev.slug === generateSlug(prev.name))) {
+        updated.slug = generateSlug(value);
+      }
+      return updated;
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -69,6 +86,7 @@ function AdminProducts() {
 
     const body = {
       ...form,
+      slug: form.slug || generateSlug(form.name),
       numericPrice: Number(form.numericPrice),
       originalNumericPrice: Number(form.originalNumericPrice || form.numericPrice),
       stock: Number(form.stock),
@@ -121,10 +139,10 @@ function AdminProducts() {
               <tr>
                 <th>Image</th>
                 <th>Name</th>
+                <th>Slug</th>
                 <th>Category</th>
                 <th>Price</th>
                 <th>Stock</th>
-                <th>Rating</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -133,6 +151,7 @@ function AdminProducts() {
                 <tr key={p.id}>
                   <td><img src={p.image} alt={p.name} className="admin-product-thumb" /></td>
                   <td className="admin-td-name">{p.name}</td>
+                  <td><code style={{ fontSize: '0.75rem', color: '#6b7280', background: '#f3f4f6', padding: '2px 6px', borderRadius: '4px' }}>{p.slug || '—'}</code></td>
                   <td><span className="admin-badge admin-badge-info">{p.category}</span></td>
                   <td>₹{p.numericPrice}</td>
                   <td>
@@ -140,7 +159,6 @@ function AdminProducts() {
                       {p.stock}
                     </span>
                   </td>
-                  <td>{p.rating}</td>
                   <td>
                     <div className="admin-actions">
                       <button className="admin-btn admin-btn-sm admin-btn-edit" onClick={() => openEdit(p)}>Edit</button>
@@ -166,6 +184,11 @@ function AdminProducts() {
                 <div className="admin-form-group">
                   <label>Product Name</label>
                   <input name="name" value={form.name} onChange={handleChange} required />
+                </div>
+                <div className="admin-form-group">
+                  <label>URL Slug <span style={{ fontSize: '0.7rem', color: '#9ca3af', fontWeight: 400 }}>(SEO URL - auto generated)</span></label>
+                  <input name="slug" value={form.slug} onChange={handleChange} placeholder="auto-generated-from-name" style={{ fontFamily: 'monospace', fontSize: '0.85rem' }} />
+                  {form.slug && <span style={{ fontSize: '0.7rem', color: '#6b7280' }}>URL: /product/{form.slug}</span>}
                 </div>
                 <div className="admin-form-group">
                   <label>Category</label>
@@ -214,6 +237,26 @@ function AdminProducts() {
               <div className="admin-form-group">
                 <label>Color</label>
                 <input name="color" type="color" value={form.color} onChange={handleChange} />
+              </div>
+
+              {/* SEO Section */}
+              <div style={{ borderTop: '1px solid #e5e7eb', paddingTop: '1.25rem', marginTop: '0.5rem' }}>
+                <label style={{ fontWeight: 700, fontSize: '0.95rem', color: '#1a1a1a', marginBottom: '0.75rem', display: 'block' }}>SEO Settings (Optional)</label>
+                <p style={{ fontSize: '0.8rem', color: '#9ca3af', marginBottom: '0.75rem' }}>Google search me dikhne ke liye. Better SEO = More customers from Google.</p>
+                <div className="admin-form-group">
+                  <label>Meta Title <span style={{ fontSize: '0.7rem', color: '#9ca3af', fontWeight: 400 }}>(60 chars recommended)</span></label>
+                  <input value={form.seo.metaTitle} onChange={e => setForm(prev => ({...prev, seo: {...prev.seo, metaTitle: e.target.value}}))} placeholder="Product Name - Category | BetterWash" />
+                  <span style={{ fontSize: '0.7rem', color: form.seo.metaTitle.length > 60 ? '#ef4444' : '#9ca3af' }}>{form.seo.metaTitle.length}/60</span>
+                </div>
+                <div className="admin-form-group">
+                  <label>Meta Description <span style={{ fontSize: '0.7rem', color: '#9ca3af', fontWeight: 400 }}>(155 chars recommended)</span></label>
+                  <textarea value={form.seo.metaDescription} onChange={e => setForm(prev => ({...prev, seo: {...prev.seo, metaDescription: e.target.value}}))} rows="2" placeholder="Short description for Google search results..." />
+                  <span style={{ fontSize: '0.7rem', color: form.seo.metaDescription.length > 155 ? '#ef4444' : '#9ca3af' }}>{form.seo.metaDescription.length}/155</span>
+                </div>
+                <div className="admin-form-group">
+                  <label>Meta Keywords <span style={{ fontSize: '0.7rem', color: '#9ca3af', fontWeight: 400 }}>(comma separated)</span></label>
+                  <input value={form.seo.metaKeywords} onChange={e => setForm(prev => ({...prev, seo: {...prev.seo, metaKeywords: e.target.value}}))} placeholder="body wash, natural, herbal, BetterWash" />
+                </div>
               </div>
 
               <div className="admin-modal-footer">

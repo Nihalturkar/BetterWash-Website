@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import { useSettings } from '../../context/SettingsContext';
+import SEOHead, { getProductJsonLd } from '../../components/SEO/SEOHead';
 import './ProductDetail.css';
 
 import { API_URL } from '../../config';
 
 function ProductDetail() {
-  const { id } = useParams();
+  const { slug } = useParams();
   const { addToCart } = useCart();
   const { settings } = useSettings();
   const [product, setProduct] = useState(null);
@@ -17,7 +18,7 @@ function ProductDetail() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetch(`${API_URL}/products/${id}`)
+    fetch(`${API_URL}/products/${slug}`)
       .then(r => {
         if (!r.ok) throw new Error('Not found');
         return r.json();
@@ -28,11 +29,11 @@ function ProductDetail() {
       })
       .catch(() => {
         import('../../data/products').then(m => {
-          const prod = m.products.find(p => p.id === parseInt(id));
+          const prod = m.products.find(p => p.slug === slug || p.id === parseInt(slug));
           setProduct(prod || null);
         });
       });
-  }, [id]);
+  }, [slug]);
 
   if (!product) return <div className="product-detail-container" style={{paddingTop: '100px'}}>Loading...</div>;
 
@@ -53,8 +54,20 @@ function ProductDetail() {
     setOrderForm({ name: '', phone: '', address: '', city: '', pincode: '' });
   };
 
+  const seo = product.seo || {};
+
   return (
     <div className="product-detail-container">
+      <SEOHead
+        title={seo.metaTitle || `${product.name} - ${product.category} | BetterWash`}
+        description={seo.metaDescription || product.longDescription || product.description}
+        keywords={seo.metaKeywords || `${product.name}, ${product.category}, BetterWash`}
+        canonicalUrl={`/product/${product.slug}`}
+        ogType="product"
+        ogImage={product.image}
+        jsonLd={getProductJsonLd(product)}
+      />
+
       <div className="product-image-section">
         <img src={product.image} alt={product.name} className="product-detail-img" />
       </div>
@@ -63,7 +76,7 @@ function ProductDetail() {
         <div className="product-breadcrumb">
           <Link to="/">Home</Link>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6"/></svg>
-          <Link to={`/category/${product.category}`}>{product.category}</Link>
+          <Link to={`/category/${product.category.toLowerCase().replace(/\s+/g, '-')}`}>{product.category}</Link>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6"/></svg>
           <span>{product.name}</span>
         </div>

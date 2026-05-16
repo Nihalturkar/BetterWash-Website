@@ -4,13 +4,19 @@ import ImageUpload from '../../components/Admin/ImageUpload';
 
 import { API_URL } from '../../config';
 
+function generateSlug(text) {
+  return text.toString().toLowerCase().trim()
+    .replace(/[\s_]+/g, '-').replace(/[^\w\-]+/g, '')
+    .replace(/\-\-+/g, '-').replace(/^-+/, '').replace(/-+$/, '');
+}
+
 function AdminCategories() {
   const { token } = useAuth();
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [editId, setEditId] = useState(null);
-  const [form, setForm] = useState({ name: '', description: '', image: '', count: '', color: '#008b8b' });
+  const [form, setForm] = useState({ name: '', slug: '', description: '', image: '', count: '', color: '#008b8b' });
   const [saving, setSaving] = useState(false);
 
   const fetchCategories = () => {
@@ -26,23 +32,36 @@ function AdminCategories() {
 
   const openAdd = () => {
     setEditId(null);
-    setForm({ name: '', description: '', image: '', count: '', color: '#008b8b' });
+    setForm({ name: '', slug: '', description: '', image: '', count: '', color: '#008b8b' });
     setShowModal(true);
   };
 
   const openEdit = (cat) => {
     setEditId(cat.id);
-    setForm({ name: cat.name, description: cat.description, image: cat.image, count: cat.count, color: cat.color });
+    setForm({ name: cat.name, slug: cat.slug || '', description: cat.description, image: cat.image, count: cat.count, color: cat.color });
     setShowModal(true);
   };
 
   const handleChange = (e) => {
-    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    setForm(prev => {
+      const updated = { ...prev, [name]: value };
+      if (name === 'name' && (!prev.slug || prev.slug === generateSlug(prev.name))) {
+        updated.slug = generateSlug(value);
+      }
+      return updated;
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSaving(true);
+
+    const body = {
+      ...form,
+      slug: form.slug || generateSlug(form.name),
+    };
+
     const url = editId ? `${API_URL}/categories/${editId}` : `${API_URL}/categories`;
     const method = editId ? 'PUT' : 'POST';
 
@@ -50,7 +69,7 @@ function AdminCategories() {
       await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-        body: JSON.stringify(form)
+        body: JSON.stringify(body)
       });
       setShowModal(false);
       fetchCategories();
@@ -89,7 +108,8 @@ function AdminCategories() {
             <div className="admin-category-info">
               <h3>{cat.name}</h3>
               <p>{cat.description}</p>
-              <span className="admin-badge admin-badge-info">{cat.count}</span>
+              <code style={{ fontSize: '0.7rem', color: '#6b7280', background: '#f3f4f6', padding: '2px 6px', borderRadius: '4px' }}>/{cat.slug || '—'}</code>
+              <span className="admin-badge admin-badge-info" style={{ marginLeft: '6px' }}>{cat.count}</span>
             </div>
             <div className="admin-category-actions">
               <button className="admin-btn admin-btn-sm admin-btn-edit" onClick={() => openEdit(cat)}>Edit</button>
@@ -112,6 +132,11 @@ function AdminCategories() {
                 <input name="name" value={form.name} onChange={handleChange} required />
               </div>
               <div className="admin-form-group">
+                <label>URL Slug <span style={{ fontSize: '0.7rem', color: '#9ca3af', fontWeight: 400 }}>(SEO URL - auto generated)</span></label>
+                <input name="slug" value={form.slug} onChange={handleChange} placeholder="auto-generated-from-name" style={{ fontFamily: 'monospace', fontSize: '0.85rem' }} />
+                {form.slug && <span style={{ fontSize: '0.7rem', color: '#6b7280' }}>URL: /category/{form.slug}</span>}
+              </div>
+              <div className="admin-form-group">
                 <label>Description</label>
                 <input name="description" value={form.description} onChange={handleChange} />
               </div>
@@ -128,7 +153,7 @@ function AdminCategories() {
                 <button type="button" className="admin-btn admin-btn-secondary" onClick={() => setShowModal(false)}>Cancel</button>
                 <button type="submit" className="admin-btn admin-btn-primary" disabled={saving}>
                   {saving ? 'Saving...' : (editId ? 'Update' : 'Add Category')}
-                </button> 
+                </button>
               </div>
             </form>
           </div>

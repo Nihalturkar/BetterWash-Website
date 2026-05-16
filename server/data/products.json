@@ -1,6 +1,7 @@
 [
   {
     "id": 2,
+    "slug": "refresh-body-wash",
     "name": "Refresh Body Wash",
     "category": "Body Wash",
     "price": "₹299",
@@ -23,10 +24,17 @@
     "color": "#00b3b3",
     "stock": 120,
     "rating": 4.7,
-    "reviews": 512
+    "reviews": 512,
+    "seo": {
+      "metaTitle": "Refresh Body Wash - Aloe Vera & Vitamin E | BetterWash",
+      "metaDescription": "Energizing body wash with aloe vera and vitamin E. Deep cleansing, moisturizing formula for a spa-like shower experience. Shop now at BetterWash India.",
+      "metaKeywords": "body wash, aloe vera body wash, vitamin E body wash, refresh body wash, BetterWash"
+    },
+    "originalNumericPrice": 449
   },
   {
     "id": 3,
+    "slug": "hydra-moisturizer",
     "name": "Hydra Moisturizer",
     "category": "Moisturizer",
     "price": "₹449",
@@ -49,10 +57,16 @@
     "color": "#008b8b",
     "stock": 85,
     "rating": 4.8,
-    "reviews": 405
+    "reviews": 405,
+    "seo": {
+      "metaTitle": "Hydra Moisturizer - Hyaluronic Acid & Shea Butter | BetterWash",
+      "metaDescription": "24-hour hydration moisturizer with hyaluronic acid and shea butter. Non-greasy, fast-absorbing formula for all skin types. Shop at BetterWash India.",
+      "metaKeywords": "moisturizer, hyaluronic acid, shea butter, hydra moisturizer, BetterWash"
+    }
   },
   {
     "id": 4,
+    "slug": "glow-face-cleanser",
     "name": "Glow Face Cleanser",
     "category": "Face Cleanser",
     "price": "₹399",
@@ -75,10 +89,16 @@
     "color": "#00b3b3",
     "stock": 200,
     "rating": 4.6,
-    "reviews": 210
+    "reviews": 210,
+    "seo": {
+      "metaTitle": "Glow Face Cleanser - Vitamin C & Niacinamide | BetterWash",
+      "metaDescription": "Brightening face cleanser with vitamin C and niacinamide. Gentle pore cleansing for radiant, even-toned skin. Shop at BetterWash India.",
+      "metaKeywords": "face cleanser, vitamin C face wash, niacinamide, brightening cleanser, BetterWash"
+    }
   },
   {
     "id": 6,
+    "slug": "rose-body-lotion",
     "name": "Rose Body Lotion",
     "category": "Moisturizer",
     "price": "₹5",
@@ -102,10 +122,16 @@
     "stock": 140,
     "rating": 4.9,
     "reviews": 800,
-    "originalNumericPrice": 479
+    "originalNumericPrice": 479,
+    "seo": {
+      "metaTitle": "Rose Body Lotion - Bulgarian Rose Extract | BetterWash",
+      "metaDescription": "Luxurious rose-infused body lotion for deep hydration and soft, fragrant skin. Vegan and cruelty-free. Shop at BetterWash India.",
+      "metaKeywords": "body lotion, rose body lotion, moisturizer, Bulgarian rose, BetterWash"
+    }
   },
   {
     "id": 7,
+    "slug": "sandalwood-soap",
     "name": "Sandalwood Soap",
     "category": "Herbal Products",
     "price": "₹149",
@@ -128,10 +154,16 @@
     "color": "#008b8b",
     "stock": 200,
     "rating": 4.8,
-    "reviews": 320
+    "reviews": 320,
+    "seo": {
+      "metaTitle": "Sandalwood Soap - Pure Mysore Sandalwood | BetterWash",
+      "metaDescription": "Traditional handcrafted sandalwood soap with pure Mysore Sandalwood Oil. Cooling, soothing, and naturally radiant skin. Shop at BetterWash India.",
+      "metaKeywords": "sandalwood soap, herbal soap, Mysore sandalwood, natural soap, BetterWash"
+    }
   },
   {
     "id": 8,
+    "slug": "tea-tree-face-wash",
     "name": "Tea Tree Face Wash",
     "category": "Face Cleanser",
     "price": "₹249",
@@ -154,32 +186,11 @@
     "color": "#00b3b3",
     "stock": 75,
     "rating": 4.4,
-    "reviews": 450
-  },
-  {
-    "id": 9,
-    "name": "Coffee Body Scrub",
-    "category": "Body Wash",
-    "price": "₹399",
-    "originalPrice": "₹599",
-    "numericPrice": 399,
-    "description": "Exfoliating coffee scrub for smooth and tan-free skin.",
-    "longDescription": "Revive dull, tired skin with our energizing Coffee Body Scrub. Made with freshly ground Robusta coffee and cold-pressed coconut oil, it effectively buffs away dead skin cells, reduces cellulite, and tackles stubborn tan. Experience incredibly smooth, polished skin with a delicious aroma of fresh coffee.",
-    "benefits": [
-      "Exfoliation",
-      "Tan Removal",
-      "Smoothing"
-    ],
-    "features": [
-      "Pure Robusta Coffee Beans",
-      "Rich in antioxidants",
-      "Improves blood circulation",
-      "Sulfate & Paraben free"
-    ],
-    "image": "https://images.unsplash.com/photo-1570194065650-d99fb4ee0c8d?w=400&q=80",
-    "color": "#008b8b",
-    "stock": 50,
-    "rating": 4.7,
-    "reviews": 612
+    "reviews": 450,
+    "seo": {
+      "metaTitle": "Tea Tree Face Wash - Acne Control | BetterWash",
+      "metaDescription": "Purifying tea tree face wash for acne-free clear skin. 100% vegan with salicylic acid. Dermatologist tested. Shop at BetterWash India.",
+      "metaKeywords": "tea tree face wash, acne face wash, salicylic acid, vegan face wash, BetterWash"
+    }
   }
 ]

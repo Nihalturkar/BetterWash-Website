@@ -1,6 +1,7 @@
 [
   {
     "id": 1,
+    "slug": "shampoo",
     "name": "Shampoo",
     "image": "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?w=300&q=80",
     "count": "9 Products",
@@ -9,6 +10,7 @@
   },
   {
     "id": 2,
+    "slug": "body-wash",
     "name": "Body Wash",
     "image": "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=300&q=80",
     "count": "8 Products",
@@ -17,6 +19,7 @@
   },
   {
     "id": 3,
+    "slug": "moisturizer",
     "name": "Moisturizer",
     "image": "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?w=300&q=80",
     "count": "10 Products",
@@ -25,6 +28,7 @@
   },
   {
     "id": 4,
+    "slug": "face-cleanser",
     "name": "Face Cleanser",
     "image": "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=300&q=80",
     "count": "9 Products",

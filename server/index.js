@@ -11,6 +11,7 @@ import contactRoutes from './routes/contacts.js';
 import settingsRoutes from './routes/settings.js';
 import uploadRoutes from './routes/upload.js';
 import dashboardRoutes from './routes/dashboard.js';
+import seoRoutes from './routes/seo.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -38,6 +39,9 @@ app.use('/api/dashboard', dashboardRoutes);
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'BetterWash API is running' });
 });
+
+// SEO: sitemap.xml and robots.txt (must be before catch-all)
+app.use('/', seoRoutes);
 
 // Serve frontend build in production
 app.use(express.static(join(__dirname, 'public')));

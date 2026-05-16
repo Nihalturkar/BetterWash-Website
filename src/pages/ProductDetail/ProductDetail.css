@@ -128,22 +128,29 @@
   list-style: none;
   padding: 0;
   margin-bottom: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .features-list li {
-  position: relative;
-  padding-left: 20px;
-  margin-bottom: 10px;
-  font-size: 0.9rem;
-  color: var(--text-muted);
+  padding: 8px 16px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #1a5c5c;
+  background: linear-gradient(135deg, #e6f7f7, #f0faf9);
+  border: 1px solid #c2e6e4;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .features-list li::before {
-  content: '—';
-  position: absolute;
-  left: 0;
-  color: var(--primary);
+  content: '\2713';
+  color: #008b8b;
   font-weight: 700;
+  font-size: 0.85rem;
 }
 
 .action-section {

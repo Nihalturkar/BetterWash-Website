@@ -4,8 +4,14 @@ import ImageUpload from '../../components/Admin/ImageUpload';
 
 import { API_URL } from '../../config';
 
+function generateSlug(text) {
+  return text.toString().toLowerCase().trim()
+    .replace(/[\s_]+/g, '-').replace(/[^\w\-]+/g, '')
+    .replace(/\-\-+/g, '-').replace(/^-+/, '').replace(/-+$/, '');
+}
+
 const emptyBlog = {
-  title: '', excerpt: '', category: '', image: '', link: '', readTime: '3 min read', content: '', productAds: [],
+  title: '', slug: '', excerpt: '', category: '', image: '', link: '', readTime: '3 min read', content: '', productAds: [],
   seo: { metaTitle: '', metaDescription: '', metaKeywords: '', canonicalUrl: '', imageAlt: '' }
 };
 
@@ -39,6 +45,7 @@ function AdminBlogs() {
     setEditId(blog.id);
     setForm({
       title: blog.title,
+      slug: blog.slug || '',
       excerpt: blog.excerpt,
       category: blog.category,
       image: blog.image || '',
@@ -52,7 +59,14 @@ function AdminBlogs() {
   };
 
   const handleChange = (e) => {
-    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    setForm(prev => {
+      const updated = { ...prev, [name]: value };
+      if (name === 'title' && (!prev.slug || prev.slug === generateSlug(prev.title))) {
+        updated.slug = generateSlug(value);
+      }
+      return updated;
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -61,6 +75,7 @@ function AdminBlogs() {
 
     const body = {
       ...form,
+      slug: form.slug || generateSlug(form.title),
       content: form.content.split('\n\n').filter(Boolean),
     };
 
@@ -124,8 +139,8 @@ function AdminBlogs() {
               <tr>
                 <th>Image</th>
                 <th>Title</th>
+                <th>Slug</th>
                 <th>Category</th>
-                <th>Ads</th>
                 <th>Date</th>
                 <th>Actions</th>
               </tr>
@@ -141,14 +156,8 @@ function AdminBlogs() {
                     )}
                   </td>
                   <td className="admin-td-name">{blog.title}</td>
+                  <td><code style={{ fontSize: '0.75rem', color: '#6b7280', background: '#f3f4f6', padding: '2px 6px', borderRadius: '4px' }}>{blog.slug || '—'}</code></td>
                   <td><span className="admin-badge admin-badge-info">{blog.category}</span></td>
-                  <td>
-                    {(blog.productAds || []).length > 0 ? (
-                      <span className="admin-badge admin-badge-delivered">{blog.productAds.length} ads</span>
-                    ) : (
-                      <span style={{ color: '#9ca3af', fontSize: '0.8rem' }}>None</span>
-                    )}
-                  </td>
                   <td>{blog.date}</td>
                   <td>
                     <div className="admin-actions">
@@ -174,6 +183,11 @@ function AdminBlogs() {
               <div className="admin-form-group">
                 <label>Title</label>
                 <input name="title" value={form.title} onChange={handleChange} required />
+              </div>
+              <div className="admin-form-group">
+                <label>URL Slug <span style={{ fontSize: '0.7rem', color: '#9ca3af', fontWeight: 400 }}>(SEO URL - auto generated)</span></label>
+                <input name="slug" value={form.slug} onChange={handleChange} placeholder="auto-generated-from-title" style={{ fontFamily: 'monospace', fontSize: '0.85rem' }} />
+                {form.slug && <span style={{ fontSize: '0.7rem', color: '#6b7280' }}>URL: /blog/{form.slug}</span>}
               </div>
               <div className="admin-form-group">
                 <label>Excerpt (Short Description)</label>
@@ -203,14 +217,16 @@ function AdminBlogs() {
               {/* SEO Section */}
               <div style={{ borderTop: '1px solid #e5e7eb', paddingTop: '1.25rem', marginTop: '0.5rem' }}>
                 <label style={{ fontWeight: 700, fontSize: '0.95rem', color: '#1a1a1a', marginBottom: '0.75rem', display: 'block' }}>SEO Settings (Optional)</label>
-                <p style={{ fontSize: '0.8rem', color: '#9ca3af', marginBottom: '0.75rem' }}>Google search me dikhne ke liye. Frontend pe visible nahi hoga.</p>
+                <p style={{ fontSize: '0.8rem', color: '#9ca3af', marginBottom: '0.75rem' }}>Google search me dikhne ke liye. Better SEO = More traffic from Google.</p>
                 <div className="admin-form-group">
-                  <label>Meta Title</label>
+                  <label>Meta Title <span style={{ fontSize: '0.7rem', color: '#9ca3af', fontWeight: 400 }}>(60 chars recommended)</span></label>
                   <input value={form.seo.metaTitle} onChange={e => setForm(prev => ({...prev, seo: {...prev.seo, metaTitle: e.target.value}}))} placeholder="SEO optimized title for Google" />
+                  <span style={{ fontSize: '0.7rem', color: form.seo.metaTitle.length > 60 ? '#ef4444' : '#9ca3af' }}>{form.seo.metaTitle.length}/60</span>
                 </div>
                 <div className="admin-form-group">
-                  <label>Meta Description</label>
+                  <label>Meta Description <span style={{ fontSize: '0.7rem', color: '#9ca3af', fontWeight: 400 }}>(155 chars recommended)</span></label>
                   <textarea value={form.seo.metaDescription} onChange={e => setForm(prev => ({...prev, seo: {...prev.seo, metaDescription: e.target.value}}))} rows="2" placeholder="155 characters description for Google search results" />
+                  <span style={{ fontSize: '0.7rem', color: form.seo.metaDescription.length > 155 ? '#ef4444' : '#9ca3af' }}>{form.seo.metaDescription.length}/155</span>
                 </div>
                 <div className="admin-form-group">
                   <label>Meta Keywords (comma separated)</label>

@@ -86,12 +86,12 @@ function Blog() {
                 <div className="blog-card-footer">
                   <span className="blog-card-read-time">{post.readTime}</span>
                   <div className="blog-card-actions">
-                    <button className="blog-card-link" onClick={() => setActivePost(post)}>
+                    <Link to={`/blog/${post.slug || post.id}`} className="blog-card-link">
                       Read More
                       <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                         <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>
-                    </button>
+                    </Link>
                     {post.link && (
                       <a href={post.link} target="_blank" rel="noopener noreferrer" className="blog-card-link">
                         Visit Link

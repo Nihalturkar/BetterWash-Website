@@ -35,7 +35,7 @@ function Categories() {
         <div className={`categories-grid ${gridVisible ? 'revealed' : ''}`} ref={gridRef}>
           {categories.map((cat, index) => (
             <Link
-              to={`/category/${cat.name}`}
+              to={`/category/${cat.slug || cat.name.toLowerCase().replace(/\s+/g, '-')}`}
               className="category-card"
               key={cat.id}
               style={{ '--delay': `${index * 0.1}s`, '--accent': cat.color }}

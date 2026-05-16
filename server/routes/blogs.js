@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { readJSON, writeJSON } from '../utils/db.js';
+import { generateSlug, ensureUniqueSlug } from '../utils/slug.js';
 import { authenticateToken } from '../middleware/auth.js';
 
 const router = Router();
@@ -10,10 +11,13 @@ router.get('/', (req, res) => {
   res.json(blogs);
 });
 
-// GET /api/blogs/:id - public
-router.get('/:id', (req, res) => {
+// GET /api/blogs/:idOrSlug - public (supports both ID and slug)
+router.get('/:idOrSlug', (req, res) => {
   const blogs = readJSON('blogs.json');
-  const blog = blogs.find(b => b.id === parseInt(req.params.id));
+  const param = req.params.idOrSlug;
+  const blog = blogs.find(b =>
+    b.slug === param || b.id === parseInt(param)
+  );
   if (!blog) return res.status(404).json({ message: 'Blog not found' });
   res.json(blog);
 });
@@ -23,8 +27,14 @@ router.post('/', authenticateToken, (req, res) => {
   const blogs = readJSON('blogs.json');
   const newId = blogs.length > 0 ? Math.max(...blogs.map(b => b.id)) + 1 : 1;
 
+  const slug = ensureUniqueSlug(
+    req.body.slug || generateSlug(req.body.title),
+    blogs
+  );
+
   const newBlog = {
     id: newId,
+    slug,
     title: req.body.title,
     excerpt: req.body.excerpt || '',
     date: req.body.date || new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
@@ -48,7 +58,11 @@ router.put('/:id', authenticateToken, (req, res) => {
   const index = blogs.findIndex(b => b.id === parseInt(req.params.id));
   if (index === -1) return res.status(404).json({ message: 'Blog not found' });
 
-  blogs[index] = { ...blogs[index], ...req.body, id: blogs[index].id };
+  const slug = req.body.slug
+    ? ensureUniqueSlug(req.body.slug, blogs, blogs[index].id)
+    : blogs[index].slug || generateSlug(req.body.title || blogs[index].title);
+
+  blogs[index] = { ...blogs[index], ...req.body, id: blogs[index].id, slug };
   writeJSON('blogs.json', blogs);
   res.json(blogs[index]);
 });

@@ -84,4 +84,13 @@ router.put('/blogAds', authenticateToken, (req, res) => {
   res.json({ blogAds: settings.blogAds });
 });
 
+// --- Legal Pages (Privacy Policy & Terms) ---
+router.put('/legal', authenticateToken, (req, res) => {
+  const settings = readJSON('settings.json');
+  if (req.body.privacyPolicy !== undefined) settings.privacyPolicy = req.body.privacyPolicy;
+  if (req.body.termsOfService !== undefined) settings.termsOfService = req.body.termsOfService;
+  writeJSON('settings.json', settings);
+  res.json({ privacyPolicy: settings.privacyPolicy, termsOfService: settings.termsOfService });
+});
+
 export default router;

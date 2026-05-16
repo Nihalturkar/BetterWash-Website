@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import SEOHead from '../../components/SEO/SEOHead';
 import '../../components/Products/Products.css';
 import './CategoryDetail.css';
 
 import { API_URL } from '../../config';
 
 function CategoryDetail() {
-  const { categoryId } = useParams();
+  const { slug } = useParams();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -29,17 +30,28 @@ function CategoryDetail() {
           setLoading(false);
         });
       });
-  }, [categoryId]);
+  }, [slug]);
 
   if (loading) return <div className="category-detail-container" style={{paddingTop: '100px'}}>Loading...</div>;
 
-  const categoryInfo = categories.find(c => c.name.toLowerCase() === categoryId.toLowerCase()) ||
-    { name: categoryId, color: '#008b8b', image: '', description: 'Explore our products' };
+  // Match by slug first, then fall back to name match
+  const categoryInfo = categories.find(c => c.slug === slug) ||
+    categories.find(c => c.name.toLowerCase() === slug.toLowerCase()) ||
+    { name: slug, slug: slug, color: '#008b8b', image: '', description: 'Explore our products' };
 
-  const categoryProducts = products.filter(p => p.category.toLowerCase() === categoryId.toLowerCase());
+  const categoryProducts = products.filter(p =>
+    p.category.toLowerCase() === categoryInfo.name.toLowerCase()
+  );
 
   return (
     <div className="category-detail-container">
+      <SEOHead
+        title={`${categoryInfo.name} - Premium ${categoryInfo.name} Products | BetterWash`}
+        description={`Shop premium ${categoryInfo.name.toLowerCase()} products at BetterWash India. ${categoryInfo.description}. Natural, paraben-free skincare.`}
+        keywords={`${categoryInfo.name}, ${categoryInfo.name.toLowerCase()} products, natural ${categoryInfo.name.toLowerCase()}, BetterWash`}
+        canonicalUrl={`/category/${categoryInfo.slug || slug}`}
+      />
+
       <div className="category-header" style={{ backgroundColor: categoryInfo.color }}>
         <div className="category-header-bg"></div>
         <div className="category-header-content">
@@ -84,7 +96,7 @@ function CategoryDetail() {
                   <span className="original-price">{product.originalPrice}</span>
                 </div>
                 <Link
-                  to={`/product/${product.id}`}
+                  to={`/product/${product.slug || product.id}`}
                   className="product-btn"
                   style={{ background: product.color }}
                 >

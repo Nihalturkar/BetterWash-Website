@@ -49,6 +49,7 @@ function AdminSettings() {
     { id: 'reviews', label: 'Reviews', icon: '⭐' },
     { id: 'social', label: 'Social & WhatsApp', icon: '🔗' },
     { id: 'videoAds', label: 'Video Ads', icon: '🎬' },
+    { id: 'legal', label: 'Legal Pages', icon: '📜' },
   ];
 
   return (
@@ -344,6 +345,42 @@ function AdminSettings() {
       {/* Video Ads */}
       {activeTab === 'videoAds' && (
         <VideoAdsTab settings={settings} setSettings={setSettings} saving={saving} saveSection={saveSection} token={token} />
+      )}
+
+      {/* Legal Pages */}
+      {activeTab === 'legal' && (
+        <div className="admin-card">
+          <h2 className="admin-card-title">Privacy Policy & Terms of Service</h2>
+          <p style={{ fontSize: '0.85rem', color: '#6b7280', marginBottom: '1.5rem' }}>
+            Ye content footer me "Privacy Policy" aur "Terms of Service" buttons pe click karne pe dikhta hai. HTML tags use kar sakte ho (h3, p, ul, li, strong).
+          </p>
+
+          <div className="admin-form-group" style={{ marginBottom: '1.5rem' }}>
+            <label style={{ fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.5rem', display: 'block' }}>Privacy Policy</label>
+            <textarea
+              value={settings.privacyPolicy || ''}
+              onChange={e => setSettings({...settings, privacyPolicy: e.target.value})}
+              rows="12"
+              style={{ fontFamily: 'monospace', fontSize: '0.82rem', width: '100%', padding: '0.75rem', border: '1.5px solid #e5e7eb', borderRadius: '10px', lineHeight: '1.6' }}
+              placeholder="<h3>1. Information We Collect</h3>\n<p>Your privacy policy content here...</p>"
+            />
+          </div>
+
+          <div className="admin-form-group" style={{ marginBottom: '1.5rem' }}>
+            <label style={{ fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.5rem', display: 'block' }}>Terms of Service</label>
+            <textarea
+              value={settings.termsOfService || ''}
+              onChange={e => setSettings({...settings, termsOfService: e.target.value})}
+              rows="12"
+              style={{ fontFamily: 'monospace', fontSize: '0.82rem', width: '100%', padding: '0.75rem', border: '1.5px solid #e5e7eb', borderRadius: '10px', lineHeight: '1.6' }}
+              placeholder="<h3>1. Acceptance of Terms</h3>\n<p>Your terms content here...</p>"
+            />
+          </div>
+
+          <button className="admin-btn admin-btn-primary" disabled={saving} onClick={() => saveSection('legal', { privacyPolicy: settings.privacyPolicy || '', termsOfService: settings.termsOfService || '' })}>
+            {saving ? 'Saving...' : 'Save Legal Pages'}
+          </button>
+        </div>
       )}
     </div>
   );
