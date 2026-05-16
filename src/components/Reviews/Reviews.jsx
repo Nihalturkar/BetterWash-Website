@@ -1,60 +1,15 @@
 import { useScrollReveal, useStaggerReveal } from '../../hooks/useScrollReveal'
+import { useSettings } from '../../context/SettingsContext'
 import './Reviews.css'
 
-const reviews = [
-  {
-    id: 1,
-    name: 'Priya Sharma',
-    rating: 5,
-    text: 'BetterWash shampoo has completely transformed my hair! It feels so soft and healthy after just 2 weeks of use. Absolutely love it!',
-    product: 'Herbal Shampoo',
-    avatar: 'PS',
-  },
-  {
-    id: 2,
-    name: 'Rahul Verma',
-    rating: 5,
-    text: 'The body wash smells amazing and leaves my skin feeling fresh all day. The natural ingredients make a real difference. Highly recommend!',
-    product: 'Refresh Body Wash',
-    avatar: 'RV',
-  },
-  {
-    id: 3,
-    name: 'Anita Patel',
-    rating: 4,
-    text: 'I have sensitive skin and was worried about trying new products. BetterWash moisturizer is gentle yet effective. My skin has never felt better!',
-    product: 'Hydra Moisturizer',
-    avatar: 'AP',
-  },
-  {
-    id: 4,
-    name: 'Vikash Kumar',
-    rating: 5,
-    text: 'The face cleanser cleared my acne in just a month. Premium quality at affordable prices. BetterWash is now my go-to brand!',
-    product: 'Glow Face Cleanser',
-    avatar: 'VK',
-  },
-  {
-    id: 5,
-    name: 'Neha Gupta',
-    rating: 5,
-    text: 'Love the neem face pack! It controls my oily skin perfectly. The fact that it\'s 100% natural makes it even better. Great product!',
-    product: 'Neem Face Pack',
-    avatar: 'NG',
-  },
-  {
-    id: 6,
-    name: 'Arjun Singh',
-    rating: 4,
-    text: 'The rose body lotion is incredibly luxurious. The fragrance lasts all day and my skin stays moisturized. Worth every rupee!',
-    product: 'Rose Body Lotion',
-    avatar: 'AS',
-  },
-]
-
 function Reviews() {
+  const { settings } = useSettings()
+  const reviews = settings?.reviews || []
+
   const [headerRef, headerVisible] = useScrollReveal()
   const [gridRef, gridVisible] = useStaggerReveal(reviews.length)
+
+  if (reviews.length === 0) return null
 
   return (
     <section className="reviews" id="reviews">

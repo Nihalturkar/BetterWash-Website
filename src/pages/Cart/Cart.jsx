@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
-import '../../pages/ProductDetail/ProductDetail.css'; // For quantity selector styles
+import '../../pages/ProductDetail/ProductDetail.css';
 import './Cart.css';
+
+import { API_URL } from '../../config';
 
 function Cart() {
   const { cartItems, updateQuantity, removeFromCart, cartTotal, clearCart } = useCart();
-  
+
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -24,43 +26,61 @@ function Cart() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleWhatsAppOrder = (e) => {
+  const handleWhatsAppOrder = async (e) => {
     e.preventDefault();
-    
-    // Basic validation
+
     if (!formData.name || !formData.address || !formData.city || !formData.pincode) {
       alert("Please fill in all address details before placing the order.");
       return;
     }
 
-    // Format the message
+    // Save order to backend
+    try {
+      await fetch(`${API_URL}/orders`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          address: formData.address,
+          city: formData.city,
+          pincode: formData.pincode,
+          items: cartItems.map(item => ({
+            id: item.id,
+            name: item.name,
+            category: item.category,
+            numericPrice: item.numericPrice,
+            quantity: item.quantity
+          })),
+          total: cartTotal
+        })
+      });
+    } catch (err) {
+      // Continue even if backend is down
+    }
+
+    // Format WhatsApp message
     let message = `*New Order from BetterWash Website*\n\n`;
     message += `*Customer Details:*\n`;
     message += `Name: ${formData.name}\n`;
     message += `Phone: ${formData.phone}\n`;
     message += `Address: ${formData.address}, ${formData.city} - ${formData.pincode}\n\n`;
-    
+
     message += `*Order Items:*\n`;
     cartItems.forEach((item, index) => {
-      message += `${index + 1}. ${item.emoji} *${item.name}* (${item.category})\n`;
-      message += `   _Details:_ ${item.description}\n`;
+      message += `${index + 1}. *${item.name}* (${item.category})\n`;
       message += `   _Price:_ ${item.quantity} x ₹${item.numericPrice}\n`;
       message += `   _Subtotal:_ ₹${item.quantity * item.numericPrice}\n\n`;
     });
-    
+
     message += `\n*Total Amount: ₹${cartTotal}*\n`;
     message += `\nPlease confirm my order.`;
 
-    // The provided WhatsApp number
     const whatsappNumber = '919584251250';
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
-    // Clear cart and redirect
     clearCart();
     window.open(whatsappUrl, '_blank');
-    
-    // Optionally redirect back to home
-    // window.location.href = '/';
   };
 
   if (cartItems.length === 0) {
@@ -78,45 +98,45 @@ function Cart() {
   return (
     <div className="cart-page-container">
       <h1 className="cart-title">Your Cart</h1>
-      
+
       <div className="cart-content">
         <div className="cart-items-section">
           {cartItems.map((item) => (
             <div className="cart-item" key={item.id}>
-              <div className="cart-item-emoji" style={{ color: item.color }}>
-                {item.emoji}
+              <div className="cart-item-image">
+                <img src={item.image} alt={item.name} />
               </div>
-              
+
                <div className="cart-item-details">
                 <div className="cart-item-title">{item.name}</div>
                 <div className="cart-item-price">₹{item.numericPrice}</div>
-                
+
                 <div className="cart-item-actions">
                   <div className="quantity-selector">
-                    <button 
+                    <button
                       type="button"
-                      className="qty-btn" 
+                      className="qty-btn"
                       onClick={() => updateQuantity(item.id, item.quantity - 1)}
                     >
                       -
                     </button>
-                    <input 
-                      type="text" 
-                      className="qty-input" 
-                      value={item.quantity} 
-                      readOnly 
+                    <input
+                      type="text"
+                      className="qty-input"
+                      value={item.quantity}
+                      readOnly
                     />
-                    <button 
+                    <button
                       type="button"
-                      className="qty-btn" 
+                      className="qty-btn"
                       onClick={() => updateQuantity(item.id, item.quantity + 1)}
                     >
                       +
                     </button>
                   </div>
-                  <button 
+                  <button
                     type="button"
-                    className="remove-btn" 
+                    className="remove-btn"
                     onClick={() => removeFromCart(item.id)}
                   >
                     Remove
@@ -132,7 +152,7 @@ function Cart() {
 
         <div className="checkout-section">
           <h2 className="checkout-title">Order Summary</h2>
-          
+
           <div className="order-summary">
             <div className="summary-row">
               <span>Subtotal</span>
@@ -151,33 +171,33 @@ function Cart() {
           <form className="checkout-form" onSubmit={handleWhatsAppOrder}>
             <div className="form-group">
               <label>Full Name</label>
-              <input 
-                type="text" 
-                name="name" 
-                value={formData.name} 
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
                 onChange={handleInputChange}
-                required 
+                required
                 placeholder="John Doe"
               />
             </div>
             <div className="form-group">
               <label>Phone Number</label>
-              <input 
-                type="tel" 
-                name="phone" 
-                value={formData.phone} 
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
                 onChange={handleInputChange}
-                required 
+                required
                 placeholder="+91 9876543210"
               />
             </div>
             <div className="form-group">
               <label>Delivery Address</label>
-              <textarea 
-                name="address" 
-                value={formData.address} 
+              <textarea
+                name="address"
+                value={formData.address}
                 onChange={handleInputChange}
-                required 
+                required
                 placeholder="House No., Building Name, Street Area"
                 rows="3"
               ></textarea>
@@ -185,23 +205,23 @@ function Cart() {
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
               <div className="form-group">
                 <label>City</label>
-                <input 
-                  type="text" 
-                  name="city" 
-                  value={formData.city} 
+                <input
+                  type="text"
+                  name="city"
+                  value={formData.city}
                   onChange={handleInputChange}
-                  required 
+                  required
                   placeholder="Mumbai"
                 />
               </div>
               <div className="form-group">
                 <label>Pincode</label>
-                <input 
-                  type="text" 
-                  name="pincode" 
-                  value={formData.pincode} 
+                <input
+                  type="text"
+                  name="pincode"
+                  value={formData.pincode}
                   onChange={handleInputChange}
-                  required 
+                  required
                   placeholder="400001"
                 />
               </div>

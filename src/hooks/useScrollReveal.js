@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 
 export function useScrollReveal(options = {}) {
   const ref = useRef(null)
@@ -34,7 +34,7 @@ export function useStaggerReveal(itemCount, options = {}) {
 
   useEffect(() => {
     const element = ref.current
-    if (!element) return
+    if (!element || itemCount === 0) return
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -51,7 +51,7 @@ export function useStaggerReveal(itemCount, options = {}) {
 
     observer.observe(element)
     return () => observer.disconnect()
-  }, [options.threshold, options.rootMargin])
+  }, [itemCount, options.threshold, options.rootMargin])
 
   return [ref, isVisible]
 }

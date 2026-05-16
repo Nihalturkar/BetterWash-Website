@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useCart } from '../../context/CartContext'
+import { useSettings } from '../../context/SettingsContext'
 import './Navbar.css'
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const { totalItems } = useCart()
+  const { settings } = useSettings()
   const location = useLocation()
   
   // Is it home page?
@@ -22,7 +24,7 @@ function Navbar() {
     <nav className={`navbar ${scrolled ? 'navbar-scrolled' : ''}`}>
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
-          <img src="/betterwashLogo.jpeg" alt="BetterWash" className="logo-img" />
+          <img src={settings?.logo || '/betterwashLogo.jpeg'} alt={settings?.siteName || 'BetterWash'} className="logo-img" />
         </Link>
 
         <button

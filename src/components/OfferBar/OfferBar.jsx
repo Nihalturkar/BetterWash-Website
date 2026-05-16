@@ -1,29 +1,26 @@
-import { useState, useEffect } from 'react'
+import { useSettings } from '../../context/SettingsContext'
 import './OfferBar.css'
 
-const offers = [
-  '🎉 5% Extra Off on Prepaid Orders | Free Delivery on ₹299+',
-  '🔥 Flat 30% Off on All Shampoos — Use Code: WASH30',
-  '✨ Buy 2 Get 1 Free on Body Wash Range',
-  '🌿 New Launch: Herbal Face Pack — Introductory Price ₹199',
-]
-
 function OfferBar() {
-  const [currentOffer, setCurrentOffer] = useState(0)
+  const { settings } = useSettings()
+  const offers = settings?.offers || []
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentOffer((prev) => (prev + 1) % offers.length)
-    }, 3500)
-    return () => clearInterval(interval)
-  }, [])
+  if (offers.length === 0) return null
+
+  // Duplicate offers for seamless loop
+  const marqueeItems = [...offers, ...offers, ...offers]
 
   return (
     <div className="offer-bar">
-      <div className="offer-bar-content">
-        <span className="offer-text" key={currentOffer}>
-          {offers[currentOffer]}
-        </span>
+      <div className="offer-marquee">
+        <div className="offer-marquee-track">
+          {marqueeItems.map((offer, i) => (
+            <span className="offer-item" key={i}>
+              <span className="offer-dot"></span>
+              {offer}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   )

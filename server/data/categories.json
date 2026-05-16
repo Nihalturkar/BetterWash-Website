@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "name": "Shampoo",
+    "image": "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?w=300&q=80",
+    "count": "9 Products",
+    "description": "Nourishing hair care solutions",
+    "color": "#8a7700"
+  },
+  {
+    "id": 2,
+    "name": "Body Wash",
+    "image": "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=300&q=80",
+    "count": "8 Products",
+    "description": "Refreshing body cleansers",
+    "color": "#00b3b3"
+  },
+  {
+    "id": 3,
+    "name": "Moisturizer",
+    "image": "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?w=300&q=80",
+    "count": "10 Products",
+    "description": "Deep hydration formulas",
+    "color": "#008b8b"
+  },
+  {
+    "id": 4,
+    "name": "Face Cleanser",
+    "image": "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=300&q=80",
+    "count": "9 Products",
+    "description": "Gentle facial care",
+    "color": "#00b3b3"
+  }
+]

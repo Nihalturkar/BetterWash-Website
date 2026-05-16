@@ -1,10 +1,23 @@
+import { useState, useEffect } from 'react'
 import { useScrollReveal, useStaggerReveal } from '../../hooks/useScrollReveal'
 import './Products.css'
 
 import { Link } from 'react-router-dom'
-import { products } from '../../data/products'
+
+import { API_URL } from '../../config';
 
 function Products() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch(`${API_URL}/products`)
+      .then(r => r.json())
+      .then(data => setProducts(data))
+      .catch(() => {
+        import('../../data/products').then(m => setProducts(m.products));
+      });
+  }, []);
+
   const [headerRef, headerVisible] = useScrollReveal()
   const [gridRef, gridVisible] = useStaggerReveal(products.length)
 

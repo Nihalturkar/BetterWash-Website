@@ -12,6 +12,16 @@ dist
 dist-ssr
 *.local
 
+# Zip files
+*.zip
+
+# Server uploads & sensitive data
+server/uploads/
+server/data/admin.json
+
+# Claude
+.claude/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -1,15 +1,37 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { products, categories } from '../../data/products';
-import '../../components/Products/Products.css'; // Reuse product card styles
+import '../../components/Products/Products.css';
 import './CategoryDetail.css';
+
+import { API_URL } from '../../config';
 
 function CategoryDetail() {
   const { categoryId } = useParams();
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    Promise.all([
+      fetch(`${API_URL}/products`).then(r => r.json()),
+      fetch(`${API_URL}/categories`).then(r => r.json())
+    ])
+      .then(([prods, cats]) => {
+        setProducts(prods);
+        setCategories(cats);
+        setLoading(false);
+      })
+      .catch(() => {
+        import('../../data/products').then(m => {
+          setProducts(m.products);
+          setCategories(m.categories);
+          setLoading(false);
+        });
+      });
   }, [categoryId]);
+
+  if (loading) return <div className="category-detail-container" style={{paddingTop: '100px'}}>Loading...</div>;
 
   const categoryInfo = categories.find(c => c.name.toLowerCase() === categoryId.toLowerCase()) ||
     { name: categoryId, color: '#008b8b', image: '', description: 'Explore our products' };

@@ -1,10 +1,23 @@
+import { useState, useEffect } from 'react'
 import { useScrollReveal, useStaggerReveal } from '../../hooks/useScrollReveal'
 import './Categories.css'
 
 import { Link } from 'react-router-dom'
-import { categories } from '../../data/products'
+
+import { API_URL } from '../../config';
 
 function Categories() {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetch(`${API_URL}/categories`)
+      .then(r => r.json())
+      .then(data => setCategories(data))
+      .catch(() => {
+        import('../../data/products').then(m => setCategories(m.categories));
+      });
+  }, []);
+
   const [headerRef, headerVisible] = useScrollReveal()
   const [gridRef, gridVisible] = useStaggerReveal(categories.length)
 
