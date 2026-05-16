@@ -1,0 +1,54 @@
+name: Build & Deploy BetterWash
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Build frontend
+        run: npm run build
+
+      - name: Copy build to server/public
+        run: |
+          rm -rf server/public
+          cp -r dist server/public
+
+      - name: Deploy to public_html
+        run: |
+          # Backup data & uploads
+          mkdir -p ~/backup
+          cp -r ~/public_html/data/ ~/backup/data_backup 2>/dev/null || true
+          cp -r ~/public_html/uploads/ ~/backup/uploads_backup 2>/dev/null || true
+
+          # Copy new files
+          rm -rf ~/public_html/public ~/public_html/routes ~/public_html/middleware ~/public_html/utils
+          rm -f ~/public_html/index.js ~/public_html/package.json ~/public_html/package-lock.json
+          cp -r server/* ~/public_html/
+
+          # Restore data & uploads
+          mkdir -p ~/public_html/data ~/public_html/uploads
+          cp -rn ~/backup/data_backup/* ~/public_html/data/ 2>/dev/null || true
+          cp -rn ~/backup/uploads_backup/* ~/public_html/uploads/ 2>/dev/null || true
+
+          # Install server dependencies
+          cd ~/public_html
+          npm install --omit=dev
+
+          # Restart app
+          pm2 restart betterwash || pm2 start index.js --name betterwash
+          pm2 save
